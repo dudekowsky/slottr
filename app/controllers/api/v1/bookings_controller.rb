@@ -10,6 +10,7 @@ module Api
 
       def create
         Booking.create!(create_params)
+        render json: {}
       end
 
       def available_slots
@@ -19,7 +20,7 @@ module Api
       private
 
       def create_params
-        params.permit(:booking).require(:start_at, :end_at)
+        params.require(:booking).permit(:start, :finish)
       end
 
       def available_params

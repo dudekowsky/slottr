@@ -6,9 +6,9 @@ RSpec.describe AvailableSlotsFinder do
   let(:date) { '2022-12-09T20:04:27.901Z' }
   let(:date_of_day_before) { '2022-12-08T20:04:27.901Z' }
   let(:date_of_next_day) { '2022-12-10T20:04:27.901Z' }
-  let(:twenty_minutes) { '20' }
+  let(:minutes) { '20' }
   let(:hours) { '0' }
-  let(:params) { { date:, minutes: twenty_minutes, hours: } }
+  let(:params) { { date:, minutes:, hours: } }
 
   it 'returns all slots when no booking exists' do
     expect(described_class.call(params).length).to eq(96)
