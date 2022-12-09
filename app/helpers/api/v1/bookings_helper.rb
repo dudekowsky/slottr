@@ -1,2 +1,8 @@
-module Api::V1::BookingsHelper
+# frozen_string_literal: true
+
+module Api
+  module V1
+    module BookingsHelper
+    end
+  end
 end

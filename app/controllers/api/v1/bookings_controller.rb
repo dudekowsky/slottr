@@ -1,31 +1,30 @@
-class Api::V1::BookingsController < ApplicationController
-  def index
-    @bookings = Booking.all
-    render json: @bookings
-  end
+# frozen_string_literal: true
 
-  def create
-    Booking.create!(create_params)
-  end
+module Api
+  module V1
+    class BookingsController < ApplicationController
+      def index
+        @bookings = Booking.all
+        render json: @bookings
+      end
 
-  def available_slots
-    slots = []
-    delta_minutes = 15
-    slot_delta_time = ActiveSupport::Duration.parse("PT#{delta_minutes}M")
-    (1440 / delta_minutes).times do |i|
-      slots << Time.zone.today.beginning_of_day + (i * slot_delta_time)
+      def create
+        Booking.create!(create_params)
+      end
+
+      def available_slots
+        render json: { slots: AvailableSlotsFinder.call(available_params) }
+      end
+
+      private
+
+      def create_params
+        params.permit(:booking).require(:start_at, :end_at)
+      end
+
+      def available_params
+        params.require('date_and_duration').permit(:date, :hours, :minutes)
+      end
     end
-
-    render json: { slots: slots }
-  end
-
-  private
-
-  def create_params
-    params.permit(:booking).require(:start_at, :end_at)
-  end
-
-  def available_params
-    params.permit(:booking).require(:date, :duration)
   end
 end

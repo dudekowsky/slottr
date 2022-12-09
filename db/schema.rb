@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,10 +12,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_08_130615) do
-  create_table "bookings", id: :string, force: :cascade do |t|
-    t.datetime "start"
-    t.datetime "finish"
+ActiveRecord::Schema[7.0].define(version: 20_221_208_130_615) do
+  create_table 'bookings', id: :string, force: :cascade do |t|
+    t.datetime 'start'
+    t.datetime 'finish'
   end
-
 end
