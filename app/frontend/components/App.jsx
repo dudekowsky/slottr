@@ -82,7 +82,8 @@ const App = () => {
       }),
     }
     fetch(url, options)
-    .then((res) => res.json())
+    .then(() => getAvailableSlots())
+    
   }
 
   return (
