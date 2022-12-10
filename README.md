@@ -2,8 +2,6 @@
 
 Simple React + Rails for slot booking management.
 
-Things you may want to cover:
-
 ## Requirements
 * Ruby 3.1.2
 * Node 16.18.1
@@ -22,6 +20,8 @@ then in another terminal tab run
 ```
 npm run dev
 ```
+
+Now to go to `localhost:3000` in your browser and enjoy!
 
 ## Specs
 Just run `rspec`
