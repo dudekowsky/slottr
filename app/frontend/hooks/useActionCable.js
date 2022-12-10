@@ -1,15 +1,15 @@
-import React from 'react'
-import { createConsumer } from '@rails/actioncable'
+import React from "react";
+import { createConsumer } from "@rails/actioncable";
 
 export default function useActionCable(url) {
-  const actionCable = React.useMemo(() => createConsumer(url), [])
+  const actionCable = React.useMemo(() => createConsumer(url), []);
 
   React.useEffect(() => {
     return () => {
-      console.log('Disconnect Action Cable')
-      actionCable.disconnect()
-    }
-  }, [])
+      console.log("Disconnect Action Cable");
+      actionCable.disconnect();
+    };
+  }, []);
 
-  return { actionCable }
+  return { actionCable };
 }
