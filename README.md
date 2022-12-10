@@ -6,7 +6,7 @@ Simple React + Rails for slot booking management.
 * Ruby 3.1.2
 * Node 16.18.1
 
-## Get started
+## Project setup
 Go in the base folder and run:
 ```
 bundle
@@ -14,14 +14,29 @@ npm install
 rails db:create
 rails db:migrate
 rails db:seed
+```
+
+## Starting
+You can either run
+```
+rails assets:precompile
 rails s
 ```
-then in another terminal tab run
+
+OR
+
+run
+```
+rails s
+```
+
+And then in another terminal tab run
+
 ```
 npm run dev
 ```
 
-Now to go to `localhost:3000` in your browser and enjoy!
+Either way, you can open your browser and go to `localhost:3000`.
 
 ## Specs
 Just run `rspec`
