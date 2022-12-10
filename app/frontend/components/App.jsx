@@ -1,5 +1,7 @@
 import React from 'react';
 import RangePicker from './RangePicker'
+import useActionCable from '../hooks/useActionCable';
+import useChannel from '../hooks/useChannel';
 
 const App = () => {
   const [slots, setSlots] = React.useState([]);
@@ -10,6 +12,19 @@ const App = () => {
   })
   const [selectedSlot, setSelectedSlot] = React.useState('')
   const callbackRef = React.useRef(true)
+  const {actionCable} = useActionCable('ws://localhost:3000/cable')
+  const {subscribe, unsubscribe, send} = useChannel(actionCable)
+
+  React.useEffect(() => {
+    subscribe({channel: 'UpdatesChannel'}, {
+      received: (x) => {
+        getAvailableSlots()
+      }
+    })
+    return () => {
+      unsubscribe()
+    }
+  }, [])
 
   React.useEffect(() => {
     if (callbackRef.current) {

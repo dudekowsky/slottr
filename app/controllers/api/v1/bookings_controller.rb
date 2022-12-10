@@ -10,6 +10,7 @@ module Api
 
       def create
         Booking.create!(create_params)
+        ActionCable.server.broadcast('updates_channel', { body: 'slots-updated'})
         render json: {}
       end
 
