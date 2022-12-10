@@ -1,24 +1,27 @@
-# README
+# Slottr
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Simple React + Rails for slot booking management.
 
 Things you may want to cover:
 
-* Ruby version
+## Requirements
+* Ruby 3.1.2
+* Node 16.18.1
 
-* System dependencies
+## Get started
+Go in the base folder and run:
+```
+bundle
+npm install
+rails db:create
+rails db:migrate
+rails db:seed
+rails s
+```
+then in another terminal tab run
+```
+npm run dev
+```
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Specs
+Just run `rspec`
