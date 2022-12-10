@@ -1,6 +1,6 @@
 # Slottr
 
-Simple React + Rails for slot booking management.
+Simple React + Rails app for slot booking management.
 
 ## Requirements
 * Ruby 3.1.2
