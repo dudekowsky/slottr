@@ -23,30 +23,35 @@ export default function RangePicker(props) {
   }
   return (
     <>
-      <DatePicker selected={props.dateAndDuration.date} onChange={(date) => updateDate(date)} />
-      <div>
-        <span>Hours</span>
-        <input 
-          type="number" 
-          id="slot_duration_hours"
-          value={props.dateAndDuration.hours}
-          min="0"
-          max="23" 
-          pattern="[0-9]+"
-          onChange={updateHours}
-        />
-      </div>
-      <div>
-        <span>Minutes</span>
-        <input 
-          type="number" 
-          id="slot_duration_minutes" 
-          value={props.dateAndDuration.minutes}
-          min="0" 
-          max="59" 
-          pattern="[0-9]+"
-          onChange={(minutes) => updateMinutes(minutes)}
-        />
+        <label>Step 1: Select a date and duration</label>
+        <div className="rangepicker">
+          <DatePicker selected={props.dateAndDuration.date} onChange={(date) => updateDate(date)} />
+        <div className="timepicker">
+          <div className="hourspicker">
+            <span>Hours:</span>
+            <input 
+              type="number" 
+              id="slot_duration_hours"
+              value={props.dateAndDuration.hours}
+              min="0"
+              max="23" 
+              pattern="[0-9]+"
+              onChange={updateHours}
+            />
+          </div>
+          <div className="minutespicker">
+            <span>Minutes:</span>
+            <input 
+              type="number" 
+              id="slot_duration_minutes" 
+              value={props.dateAndDuration.minutes}
+              min="0" 
+              max="59" 
+              pattern="[0-9]+"
+              onChange={updateMinutes}
+            />
+          </div>
+        </div>
       </div>
     </>
   );

@@ -1,7 +1,9 @@
 import React from 'react';
 import RangePicker from './RangePicker'
+import { toast, Toaster } from 'react-hot-toast';
 import useActionCable from '../hooks/useActionCable';
 import useChannel from '../hooks/useChannel';
+import './App.css'
 
 const App = () => {
   const [slots, setSlots] = React.useState([]);
@@ -12,7 +14,7 @@ const App = () => {
   })
   const [selectedSlot, setSelectedSlot] = React.useState('')
   const callbackRef = React.useRef(true)
-  const {actionCable} = useActionCable('ws://localhost:3000/cable')
+  const {actionCable} = useActionCable(`ws://${window.location.host}/cable`)
   const {subscribe, unsubscribe, send} = useChannel(actionCable)
 
   React.useEffect(() => {
@@ -53,7 +55,12 @@ const App = () => {
     }
     fetch(url, options)
     .then((res) => res.json())
-    .then((res) => setSlots(res.slots));
+    .then((res) => {
+      setSlots(res.slots)
+      if (res.slots.indexOf(selectedSlot) == -1) {
+        setSelectedSlot('')
+      }
+    });
   }
 
   function selectSlot(event) {
@@ -69,7 +76,7 @@ const App = () => {
     return slots.map((slot) => {
       const date = new Date(slot)
       return (
-        <label key={slot}>
+        <label key={slot} className={(slot == selectedSlot) ? "slot selected" : "slot"}>
           <input key={slot} className="slotcheckbox" checked={slot === selectedSlot} type="checkbox" onChange={selectSlot} value={slot}/>
           {date.toISOString().substring(11, 16)}
         </label>
@@ -97,16 +104,36 @@ const App = () => {
       }),
     }
     fetch(url, options)
-    .then(() => getAvailableSlots())
-    
+    .then(function(response) {
+      if (!response.ok) {
+          throw Error(response.statusText);
+      }
+      return response;
+    }).then(function(response) {
+        toast.success('Successfully booked!');
+    }).catch(function(error) {
+        toast.error('Booking did not work');
+    })
+    .then(() => {
+      setSelectedSlot('')
+      getAvailableSlots()
+    })
   }
 
   return (
     <>
-      <RangePicker dateAndDuration={dateAndDuration} setDateAndDuration={setDateAndDurationWithHook}/>
-      <div>
-        <button disabled={selectedSlot == ''} onClick={bookSlot}>Book now!</button>
-        {mapSlots(slots)}
+      <Toaster position="bottom-center" reverseOrder={false}/>
+      <div className="container">
+        <div className="controls">
+          <RangePicker dateAndDuration={dateAndDuration} setDateAndDuration={setDateAndDurationWithHook}/>
+          <button className="book-button" disabled={selectedSlot == ''} onClick={bookSlot}>Book now!</button>
+        </div>
+        <div className="slotpicker">
+          Step 2: Select a start time
+          <div className="slotscontainer">
+            {mapSlots(slots)}
+          </div>
+        </div>
       </div>
     </>
 

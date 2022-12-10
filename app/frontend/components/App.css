@@ -1,0 +1,66 @@
+.react-datepicker-wrapper {
+  padding: 10px;
+}
+
+.slotpicker {
+  text-align: center;
+}
+
+.container {
+  display: inline-flex;
+  align-items: left;
+  padding: 20px;
+}
+
+.rangepicker {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.hourspicker > input {
+  margin: 10px;
+}
+
+.minutespicker > input {
+  margin: 10px;
+}
+
+.controls {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.book-button {
+  height: 40px;
+}
+
+.slotscontainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 20px
+}
+
+.slot {
+  width: 100px;
+  line-height: 30px;
+  height: 30px;
+  background-color: lightblue;
+  margin: 5px;
+  border-color: black;
+  border-radius: 5px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.slot > input {
+  display: none;
+}
+
+.selected {
+  background-color: lightpink !important;
+}

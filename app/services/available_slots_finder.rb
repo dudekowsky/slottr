@@ -1,5 +1,6 @@
 class AvailableSlotsFinder
   DELTA_MINUTES = 15
+  NUMBER_OF_SLOTS = (1.day.in_minutes / DELTA_MINUTES).to_i # 96
 
   def self.call(params)
     new(params).call
@@ -17,7 +18,7 @@ class AvailableSlotsFinder
     slots = []
     slot_delta_time = ActiveSupport::Duration.parse("PT#{DELTA_MINUTES}M")
 
-    (1.day.in_minutes / DELTA_MINUTES).to_i.times do |i|
+    NUMBER_OF_SLOTS.times do |i|
       slots << @beginning_of_day + (i * slot_delta_time)
     end
 

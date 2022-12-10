@@ -12,4 +12,11 @@ RSpec.describe Booking, type: :model do
                      finish: (Date.today.beginning_of_day + 30.minutes))
     end.not_to(change { Booking.count })
   end
+
+  it 'does not create a booking where start is after finish' do
+    expect do
+      Booking.create(start: Date.today.beginning_of_day + 30.minutes,
+                     finish: (Date.today.beginning_of_day))
+    end.not_to(change { Booking.count })
+  end
 end
