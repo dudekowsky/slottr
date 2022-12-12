@@ -3,11 +3,6 @@
 module Api
   module V1
     class BookingsController < ApplicationController
-      def index
-        @bookings = Booking.all
-        render json: @bookings
-      end
-
       def create
         Booking.create!(create_params)
         ActionCable.server.broadcast('updates_channel', { body: 'slots-updated'})
